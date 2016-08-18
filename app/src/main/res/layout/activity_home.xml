@@ -67,6 +67,12 @@
                 android:textSize="10sp"
                 android:textIsSelectable="true"
                 android:textAlignment="viewStart" />
+            <ImageView
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/shop"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -84,11 +90,11 @@
 
             <TextView
                 style="@style/smallFont"
-                android:text="Settings &amp; Preferences"
+                android:text="Settings, Preferences &amp; Orders"
                 android:textSize="10sp" />
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_weight="1"
                 android:layout_gravity="bottom"
                 android:src="@drawable/account"/>
@@ -114,8 +120,10 @@
                 android:text="get priority help. jump the queue"
                 android:textSize="10sp" />
             <ImageView
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/roadassist"
                 />
         </LinearLayout>
         <LinearLayout
@@ -176,7 +184,7 @@
 
             <TextView
                 style="@style/smallFont"
-                android:text="traffic,closed roads, risk areas"
+                android:text="traffic,closed roads, diversions, risk areas"
                 android:textSize="10sp"
                 android:textIsSelectable="true" />
             <ImageView
