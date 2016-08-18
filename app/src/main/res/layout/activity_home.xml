@@ -8,54 +8,223 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.crysoft.me.autobot.MainHome">
+
     <LinearLayout
         android:id="@+id/llToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AUTOBOT"
-            android:background="@color/colorPrimary"
-            android:textColor="@android:color/white"
-            android:padding="5dp"
             android:layout_marginBottom="5dp"
-            android:textSize="16dp"/>
+            android:background="@color/colorPrimary"
+            android:padding="5dp"
+            android:text="AUTOBOT"
+            android:textColor="@android:color/white"
+            android:textSize="16dp" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/colorPrimary"/>
+            android:background="@color/colorPrimary" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/lLWelcome"
-        android:layout_below="@+id/llToolbar"
-        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llToolbar"
+        android:layout_marginTop="15dp">
+
         <TextView
             android:id="@+id/tvWelcomeTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Welcome Caden"
-            android:textSize="21sp"
-            />
+            android:textSize="21sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lLRow1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lLWelcome"
+        android:layout_marginTop="15dp">
+
+        <LinearLayout
+            style="@style/linearBox"
+            android:layout_weight="2">
+
+            <TextView
+                style="@style/mediumFont"
+                android:text="shop" />
+
+            <TextView
+                style="@style/smallFont"
+                android:text="Find parts and Accessories"
+                android:textSize="10sp"
+                android:textIsSelectable="true"
+                android:textAlignment="viewStart" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginLeft="6dp"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                style="@style/mediumFont"
+                android:text="Account" />
+
+            <TextView
+                style="@style/smallFont"
+                android:text="Settings &amp; Preferences"
+                android:textSize="10sp" />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:layout_gravity="bottom"
+                android:src="@drawable/account"/>
+        </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
-        android:layout_below="@+id/lLWelcome"
+        android:id="@+id/lLRow2"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/lLRow1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
-            android:background="@color/colorPrimary"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:padding="5dp">
+            style="@style/linearBox"
+            android:layout_weight="1">
+
             <TextView
+                style="@style/mediumFont"
+                android:text="road assistance" />
+
+            <TextView
+                style="@style/smallFont"
+                android:text="get priority help. jump the queue"
+                android:textSize="10sp" />
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:text="balance"/>
-            </LinearLayout>
-    </LinearLayout>
+                />
+        </LinearLayout>
+        <LinearLayout
+            style="@style/linearBox"
+            android:layout_marginLeft="6dp"
+            android:layout_weight="1">
 
+            <TextView
+                style="@style/mediumFont"
+                android:text="mechanic services" />
+
+            <TextView
+                style="@style/smallFont"
+                android:text="find mechanics near you"
+                android:textSize="10sp" />
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:layout_gravity="bottom"
+                android:src="@drawable/location"/>
+        </LinearLayout>
+        <LinearLayout
+            style="@style/linearBox"
+            android:layout_marginLeft="6dp"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/mediumFont"
+                android:text="location services" />
+
+            <TextView
+                style="@style/smallFont"
+                android:text="find the nearest parts shop"
+                android:textSize="10sp"
+                android:textIsSelectable="true" />
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:layout_gravity="bottom"
+                android:src="@drawable/location_services"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/lLRow3"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/lLRow2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            style="@style/linearBox"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/mediumFont"
+                android:text="Alerts" />
+
+            <TextView
+                style="@style/smallFont"
+                android:text="traffic,closed roads, risk areas"
+                android:textSize="10sp"
+                android:textIsSelectable="true" />
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:src="@drawable/alerts"/>
+        </LinearLayout>
+        <LinearLayout
+            style="@style/linearBox"
+            android:layout_marginLeft="6dp"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/mediumFont"
+                android:text="news" />
+
+            <TextView
+                style="@style/smallFont"
+                android:textSize="10sp"
+                android:text="traffic rules,bad drivers" />
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:layout_gravity="bottom"
+                android:src="@drawable/news"/>
+
+        </LinearLayout>
+        <LinearLayout
+            style="@style/linearBox"
+            android:layout_marginLeft="6dp"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/mediumFont"
+                android:text="safety tips" />
+
+            <TextView
+                style="@style/smallFont"
+                android:text="pointers to stay safe on the roads"
+                android:textSize="10sp"
+                android:textIsSelectable="true" />
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/safety"
+                android:layout_weight="1"/>
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>
