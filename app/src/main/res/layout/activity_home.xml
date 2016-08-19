@@ -14,16 +14,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:background="@color/colorPrimary"
-            android:padding="5dp"
-            android:text="AUTOBOT"
-            android:textColor="@android:color/white"
-            android:textSize="16dp" />
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@color/colorPrimary"
+                android:padding="5dp"
+                android:text="AUTOBOT"
+                android:textColor="@android:color/white"
+                android:textSize="16dp" />
+            <ImageView
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_gravity="right"
+                android:layout_height="28dp"
+                android:src="@drawable/overflow"/>
+
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
@@ -64,7 +75,6 @@
             <TextView
                 style="@style/smallFont"
                 android:text="Find parts and Accessories"
-                android:textSize="10sp"
                 android:textIsSelectable="true"
                 android:textAlignment="viewStart" />
             <ImageView
@@ -91,7 +101,7 @@
             <TextView
                 style="@style/smallFont"
                 android:text="Settings, Preferences &amp; Orders"
-                android:textSize="10sp" />
+                />
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -117,8 +127,8 @@
 
             <TextView
                 style="@style/smallFont"
-                android:text="get priority help. jump the queue"
-                android:textSize="10sp" />
+                android:text="get priority help"
+                 />
             <ImageView
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
@@ -133,12 +143,13 @@
 
             <TextView
                 style="@style/mediumFont"
-                android:text="mechanic services" />
+                android:text="mechanic services"
+                android:layout_width="match_parent" />
 
             <TextView
                 style="@style/smallFont"
                 android:text="find mechanics near you"
-                android:textSize="10sp" />
+                />
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -158,7 +169,7 @@
             <TextView
                 style="@style/smallFont"
                 android:text="find the nearest parts shop"
-                android:textSize="10sp"
+
                 android:textIsSelectable="true" />
             <ImageView
                 android:layout_width="25dp"
@@ -185,7 +196,7 @@
             <TextView
                 style="@style/smallFont"
                 android:text="traffic,closed roads, diversions, risk areas"
-                android:textSize="10sp"
+
                 android:textIsSelectable="true" />
             <ImageView
                 android:layout_width="25dp"
@@ -204,7 +215,7 @@
 
             <TextView
                 style="@style/smallFont"
-                android:textSize="10sp"
+
                 android:text="traffic rules,bad drivers" />
             <ImageView
                 android:layout_width="25dp"
@@ -226,7 +237,7 @@
             <TextView
                 style="@style/smallFont"
                 android:text="pointers to stay safe on the roads"
-                android:textSize="10sp"
+
                 android:textIsSelectable="true" />
             <ImageView
                 android:layout_width="25dp"
