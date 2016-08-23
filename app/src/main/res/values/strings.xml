@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Auto Bot</string>
+    <string name="title_activity_shop">Shop</string>
+    <string name="title_activity_roadside_assist">Roadside Assist</string>
+    <string name="title_activity_mechanics">Mechanics</string>
+    <string name="title_activity_location_services">Location Services</string>
+    <string name="title_activity_alerts">Alerts</string>
+    <string name="title_activity_news">News</string>
+    <string name="title_activity_safety_tips">Safety Tips</string>
 </resources>

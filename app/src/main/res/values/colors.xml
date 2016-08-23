@@ -5,4 +5,5 @@
     <color name="colorAccent">#F57F17</color>
     <color name="colorGrey">#efefef</color>
     <color name="list_item_title">#fff</color>
+    <color name="backgroundColor">#e7e8ea</color>
 </resources>
