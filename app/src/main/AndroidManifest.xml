@@ -76,7 +76,7 @@
                 android:value="com.crysoft.me.autobot.MainHome" />
         </activity>
         <activity
-            android:name=".NewsActivity"
+            android:name=".TipsActivity"
             android:label="@string/title_activity_news"
             android:parentActivityName=".MainHome"
             android:theme="@style/AppTheme">
@@ -85,10 +85,18 @@
                 android:value="com.crysoft.me.autobot.MainHome" />
         </activity>
         <activity
-            android:name=".SafetyTipsActivity"
+            android:name=".QuickTipsActivity"
             android:label="@string/title_activity_safety_tips"
             android:parentActivityName=".MainHome"
             android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.crysoft.me.autobot.MainHome" />
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainHome">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.crysoft.me.autobot.MainHome" />

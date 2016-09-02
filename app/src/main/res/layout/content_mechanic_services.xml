@@ -9,9 +9,11 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.crysoft.me.autobot.SafetyTipsActivity"
-    tools:showIn="@layout/activity_safety_tips">
+    tools:context="com.crysoft.me.autobot.MechanicsActivity"
+    tools:showIn="@layout/activity_mechanics">
+
     <include layout="@layout/toolbar" />
+
     <LinearLayout
         android:id="@+id/lLWelcome"
         android:layout_width="match_parent"
@@ -23,8 +25,18 @@
             android:id="@+id/tvWelcomeTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Safety Tips"
+            android:text="Find nearest Mechanic"
             android:textColor="#858282"
             android:textSize="21sp" />
     </LinearLayout>
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lLWelcome"
+        tools:context="com.crysoft.me.autobot.MechanicsActivity" />
 </RelativeLayout>

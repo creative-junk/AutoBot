@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.crysoft.me.autobot.SafetyTipsActivity">
+    android:background="@color/backgroundColor"
+    tools:context=".QuickTipsActivity">
 
 
-    <include layout="@layout/content_safety_tips" />
+    <include layout="@layout/content_quick_tips" />
 
 </android.support.design.widget.CoordinatorLayout>

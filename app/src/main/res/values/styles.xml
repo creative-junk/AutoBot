@@ -29,6 +29,39 @@
         <item name="android:padding">5dp</item>
         <item name="android:orientation">vertical</item>
     </style>
+    <style name="assistBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:layout_margin">1dp</item>
+    </style>
+    <style name="assistText">
+        <item name="android:textSize">20sp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+
+    </style>
+    <style name="greyTextView" parent="TextAppearance.AppCompat.Medium">
+
+        <item name="android:background">@android:color/white</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/colorGrey</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="primaryTextView" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">10dp</item>
+    </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

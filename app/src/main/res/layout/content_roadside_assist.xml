@@ -11,7 +11,9 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.crysoft.me.autobot.RoadsideAssistActivity"
     tools:showIn="@layout/activity_roadside_assist">
+
     <include layout="@layout/toolbar" />
+
     <LinearLayout
         android:id="@+id/lLWelcome"
         android:layout_width="match_parent"
@@ -23,16 +25,79 @@
             android:id="@+id/tvWelcomeTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Road Assist"
+            android:text="What would you like today?"
             android:textColor="#858282"
-            android:textSize="21sp" />
+            android:textSize="21sp"
+            android:layout_marginBottom="10dp"/>
     </LinearLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_below="@+id/lLWelcome">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lLWelcome"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <LinearLayout
+            style="@style/assistBox">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/jumpstart" />
+
+            <TextView
+                style="@style/assistText"
+                android:text="Jump Start" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/assistBox">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/outoffuel" />
+
+            <TextView
+                style="@style/assistText"
+                android:text="Out of Fuel" />
+        </LinearLayout>
+        <LinearLayout
+            style="@style/assistBox">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/lockout" />
+
+            <TextView
+                style="@style/assistText"
+                android:text="Lock Out" />
+        </LinearLayout>
+        <LinearLayout
+            style="@style/assistBox">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/flattire" />
+
+            <TextView
+                style="@style/assistText"
+                android:text="Flat Tire" />
+        </LinearLayout>
+        <LinearLayout
+            style="@style/assistBox">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/towtruck" />
+
+            <TextView
+                style="@style/assistText"
+                android:text="Tow" />
+        </LinearLayout>
+
+    </LinearLayout>
 </RelativeLayout>

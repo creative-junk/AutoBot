@@ -7,8 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.crysoft.me.autobot.MainHome"
-    android:background="">
+    tools:context="com.crysoft.me.autobot.MainHome">
 
     <LinearLayout
         android:id="@+id/llToolbar"
@@ -66,7 +65,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lLWelcome"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="15dp"
+        android:onClick="goToShop">
 
         <LinearLayout
             style="@style/linearBox"
@@ -96,7 +96,8 @@
             android:layout_weight="1"
             android:background="@color/colorAccent"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:onClick="goToSettings">
 
             <TextView
                 style="@style/mediumFont"
@@ -120,7 +121,8 @@
         android:layout_marginTop="10dp"
         android:layout_below="@+id/lLRow1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="goToAssist">
         <LinearLayout
             style="@style/linearBox"
             android:layout_weight="1">
@@ -143,7 +145,8 @@
         <LinearLayout
             style="@style/linearBox"
             android:layout_marginLeft="6dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:onClick="findAMechanic">
 
             <TextView
                 style="@style/mediumFont"
@@ -152,7 +155,7 @@
 
             <TextView
                 style="@style/smallFont"
-                android:text="find mechanics near you"
+                android:text="find the nearest mechanic"
                 />
             <ImageView
                 android:layout_width="25dp"
@@ -164,7 +167,8 @@
         <LinearLayout
             style="@style/linearBox"
             android:layout_marginLeft="6dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:onClick="findAShop">
 
             <TextView
                 style="@style/mediumFont"
@@ -188,18 +192,19 @@
         android:layout_marginTop="10dp"
         android:layout_below="@+id/lLRow2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="goToAlerts">
         <LinearLayout
             style="@style/linearBox"
             android:layout_weight="1">
 
             <TextView
                 style="@style/mediumFont"
-                android:text="Alerts" />
+                android:text="News &amp; Alerts" />
 
             <TextView
                 style="@style/smallFont"
-                android:text="traffic,closed roads, diversions, risk areas"
+                android:text="traffic,closed roads, diversions, risk areas,bad drivers"
 
                 android:textIsSelectable="true" />
             <ImageView
@@ -211,16 +216,17 @@
         <LinearLayout
             style="@style/linearBox"
             android:layout_marginLeft="6dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:onClick="goToNews">
 
             <TextView
                 style="@style/mediumFont"
-                android:text="news" />
+                android:text="Quick tips" />
 
             <TextView
                 style="@style/smallFont"
 
-                android:text="traffic rules,bad drivers" />
+                android:text="safety,service,fuel economy" />
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -232,15 +238,16 @@
         <LinearLayout
             style="@style/linearBox"
             android:layout_marginLeft="6dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:onClick="findSafetyTips">
 
             <TextView
                 style="@style/mediumFont"
-                android:text="safety tips" />
+                android:text="food stops" />
 
             <TextView
                 style="@style/smallFont"
-                android:text="pointers to stay safe on the roads"
+                android:text="pointers to popular food joints around you"
 
                 android:textIsSelectable="true" />
             <ImageView
