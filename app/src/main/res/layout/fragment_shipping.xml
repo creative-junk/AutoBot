@@ -1,0 +1,125 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.crysoft.me.autobot.fragments.checkout.ShippingFragment">
+    <TextView
+        android:id="@+id/tvBanner"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="18dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_horizontal"
+        android:padding="12dp"
+        android:text="Shipping" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/tvBanner"
+        android:padding="12dp">
+<RadioGroup
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/rBtnRegularShipping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Regular Shipping"
+            android:buttonTint="@color/colorAccent"
+            android:padding="12dp"
+            android:checked="true"
+           />
+        <LinearLayout
+            android:id="@+id/lLRegularContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/tvRegularTiming"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Shipping Time: 2-8 Days"
+                style="@style/Base.TextAppearance.AppCompat.Small"/>
+            <TextView
+                android:id="@+id/tvRegularFee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:text="Fee: Ksh 200"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:text="**Shipping Fee will added to the Total Amount Payable"/>
+        </LinearLayout>
+
+        <RadioButton
+            android:id="@+id/rBtnPickupShipping"
+            android:padding="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/radioButton"
+            android:text="Pickup from Store"
+            android:buttonTint="@color/colorAccent"/>
+    <LinearLayout
+        android:id="@+id/lLPickupContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/tvPickupTiming"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Shipping Time: 2-8 Days"
+            style="@style/Base.TextAppearance.AppCompat.Small"/>
+        <TextView
+            android:id="@+id/tvPickupFee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:text="Fee: Ksh 200"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:text="**Shipping Fee will added to the Total Amount Payable"/>
+    </LinearLayout>
+
+
+</RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white">
+
+        <Button
+            android:id="@+id/btnShippingPrevious"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:text="Previous"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnShippingNext"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:text="Next"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -2,31 +2,70 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.crysoft.me.autobot">
 
+    <permission
+        android:name="com.crysoft.me.autobot.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.crysoft.me.autobot.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
+        android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainHome">
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <uses-library android:name="com.google.android.maps" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".Splash_Activity"
+            android:label="@string/title_activity_splash"
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MainHome"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ShopActivity"
             android:label="@string/title_activity_shop"
             android:parentActivityName=".MainHome"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.crysoft.me.autobot.MainHome" />
@@ -35,7 +74,8 @@
             android:name=".RoadsideAssistActivity"
             android:label="@string/title_activity_roadside_assist"
             android:parentActivityName=".MainHome"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.crysoft.me.autobot.MainHome" />
@@ -54,14 +94,16 @@
 
         <activity
             android:name=".MechanicsActivity"
-            android:label="@string/title_activity_mechanics">
+            android:label="@string/title_activity_mechanics"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.crysoft.me.autobot.MainHome" />
         </activity>
         <activity
             android:name=".LocationServicesActivity"
-            android:label="@string/title_activity_location_services">
+            android:label="@string/title_activity_location_services"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.crysoft.me.autobot.MainHome" />
@@ -70,16 +112,19 @@
             android:name=".AlertsActivity"
             android:label="@string/title_activity_alerts"
             android:parentActivityName=".MainHome"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.crysoft.me.autobot.MainHome" />
         </activity>
         <activity
-            android:name=".TipsActivity"
-            android:label="@string/title_activity_news"
+            android:name=".FoodStopsActivity"
+            android:label="Near Me"
             android:parentActivityName=".MainHome"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.crysoft.me.autobot.MainHome" />
@@ -88,7 +133,8 @@
             android:name=".QuickTipsActivity"
             android:label="@string/title_activity_safety_tips"
             android:parentActivityName=".MainHome"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.crysoft.me.autobot.MainHome" />
@@ -96,11 +142,13 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainHome">
+            android:parentActivityName=".MainHome"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.crysoft.me.autobot.MainHome" />
         </activity>
+
     </application>
 
 </manifest>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".UtilitiesActivity"
+    tools:showIn="@layout/activity_utilities">
+
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:id="@+id/lLWelcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llToolbar"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tvWelcomeTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Find Places near you"
+            android:textColor="@color/colorPrimary"
+            android:textSize="21sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lLWelcome"
+        android:orientation="vertical"
+        android:paddingTop="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@android:color/white"
+                android:layout_marginBottom="2dp"
+                android:onClick="findRestaurant">
+
+                <TextView
+                    style="@style/primaryTextView"
+                    android:layout_width="match_parent"
+                    android:text="Restaurants"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:src="@drawable/pointer"
+                    android:layout_gravity="center"
+                    android:layout_weight="7"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@android:color/white"
+                android:layout_marginBottom="2dp"
+                android:onClick="findAtms">
+
+                <TextView
+                    style="@style/primaryTextView"
+                    android:layout_width="match_parent"
+                    android:text="ATMs"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:src="@drawable/pointer"
+                    android:layout_gravity="center"
+                    android:layout_weight="7"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@android:color/white"
+                android:layout_marginBottom="2dp"
+                android:onClick="findBanks">
+
+                <TextView
+                    style="@style/primaryTextView"
+                    android:layout_width="match_parent"
+                    android:text="Banks"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:src="@drawable/pointer"
+                    android:layout_gravity="center"
+                    android:layout_weight="7"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@android:color/white"
+                android:onClick="findHospitals">
+                <TextView
+                    style="@style/primaryTextView"
+                    android:layout_width="match_parent"
+                    android:text="Hospitals"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:src="@drawable/pointer"
+                    android:layout_gravity="center"
+                    android:layout_weight="7"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@android:color/white"
+                android:onClick="findAirports">
+                <TextView
+                    style="@style/primaryTextView"
+                    android:layout_width="match_parent"
+                    android:text="Airports"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:src="@drawable/pointer"
+                    android:layout_gravity="center"
+                    android:layout_weight="7"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@android:color/white"
+                android:onClick="findMalls">
+                <TextView
+                    style="@style/primaryTextView"
+                    android:layout_width="match_parent"
+                    android:text="Shopping Malls"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:src="@drawable/pointer"
+                    android:layout_gravity="center"
+                    android:layout_weight="7"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@android:color/white"
+                android:onClick="findBars">
+                <TextView
+                    style="@style/primaryTextView"
+                    android:layout_width="match_parent"
+                    android:text="Bars"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:src="@drawable/pointer"
+                    android:layout_gravity="center"
+                    android:layout_weight="7"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@android:color/white"
+                android:onClick="findPolice">
+                <TextView
+                    style="@style/primaryTextView"
+                    android:layout_width="match_parent"
+                    android:text="Police Stations"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:src="@drawable/pointer"
+                    android:layout_gravity="center"
+                    android:layout_weight="7"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -25,8 +25,8 @@
             android:id="@+id/tvWelcomeTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="What would you like today?"
-            android:textColor="#858282"
+            android:text="Which service would you like today?"
+            android:textColor="@color/colorPrimary"
             android:textSize="21sp"
             android:layout_marginBottom="10dp"/>
     </LinearLayout>
@@ -41,8 +41,8 @@
             style="@style/assistBox">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/jumpstart" />
 
             <TextView
@@ -54,8 +54,8 @@
             style="@style/assistBox">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/outoffuel" />
 
             <TextView
@@ -66,8 +66,8 @@
             style="@style/assistBox">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/lockout" />
 
             <TextView
@@ -78,8 +78,8 @@
             style="@style/assistBox">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/flattire" />
 
             <TextView
@@ -90,8 +90,8 @@
             style="@style/assistBox">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/towtruck" />
 
             <TextView

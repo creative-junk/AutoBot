@@ -23,9 +23,90 @@
             android:id="@+id/tvWelcomeTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Parts Shop"
-            android:textColor="#858282"
+            android:text="Shop - Find Parts &amp; Accessories"
+            android:textColor="@color/colorPrimary"
             android:textSize="21sp" />
     </LinearLayout>
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="left|top"
+        android:flipInterval="5000"
+        android:inAnimation="@anim/slide_in_right"
+        android:outAnimation="@anim/slide_in_left"
+        android:layout_below="@+id/lLWelcome"
+        android:layout_marginTop="7dp">
+
+        <ImageView
+            android:id="@+id/ivFlipper1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/slider_audi" />
+
+        <ImageView
+            android:id="@+id/ivFlipper2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/slider_lexus" />
+
+        <ImageView
+            android:id="@+id/ivFlipper3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/slider_merc" />
+
+    </ViewFlipper>
+
+    <GridView
+        android:id="@+id/mainCategoryGrid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/viewFlipper"
+        android:layout_marginTop="10dp"
+        android:columnWidth="90dp"
+        android:gravity="center"
+        android:horizontalSpacing="5dp"
+        android:numColumns="2"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="7dp"/>
+
+    <GridView
+        android:id="@+id/categoryGrid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/mainCategoryGrid"
+        android:layout_marginTop="3dp"
+        android:columnWidth="90dp"
+        android:gravity="center"
+        android:horizontalSpacing="5dp"
+        android:numColumns="3"
+        android:padding="5dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="7dp">
+
+    </GridView>
+
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true" />
+    </RelativeLayout>
 
 </RelativeLayout>

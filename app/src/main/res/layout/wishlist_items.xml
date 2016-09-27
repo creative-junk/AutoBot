@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="horizontal"
+    android:padding="5dp">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivItemImageHolder">
+
+        <ImageView
+            android:id="@+id/ivItemImage"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/com_parse_ui_app_logo"/>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/ivItemImageHolder"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true">
+        <TextView
+            android:id="@+id/tvItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium Text"/>
+
+        <TextView
+            android:id="@+id/tvItemPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textColor="@color/colorPrimaryDark"
+            android:singleLine="true"
+            android:text="TextView"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
