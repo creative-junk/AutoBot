@@ -77,76 +77,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private boolean isVerified;
 
 
-    /**
-     * Whether or not the system UI should be auto-hidden after
-     * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
-     */
-    private static final boolean AUTO_HIDE = true;
-
-    /**
-     * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
-     * user interaction before hiding the system UI.
-     */
-    private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
-
-    /**
-     * Some older devices needs a small delay between UI widget updates
-     * and a change of the status and navigation bar.
-     */
-    private static final int UI_ANIMATION_DELAY = 300;
-    private final Handler mHideHandler = new Handler();
-    private View mContentView;
-    private final Runnable mHidePart2Runnable = new Runnable() {
-        @SuppressLint("InlinedApi")
-        @Override
-        public void run() {
-            // Delayed removal of status and navigation bar
-
-            // Note that some of these constants are new as of API 16 (Jelly Bean)
-            // and API 19 (KitKat). It is safe to use them, as they are inlined
-            // at compile-time and do nothing on earlier devices.
-         /*   mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-                    | View.SYSTEM_UI_FLAG_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);*/
-        }
-    };
-    private View mControlsView;
-    private final Runnable mShowPart2Runnable = new Runnable() {
-        @Override
-        public void run() {
-            // Delayed display of UI elements
-            ActionBar actionBar = getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.show();
-            }
-            //   mControlsView.setVisibility(View.VISIBLE);
-        }
-    };
-    private boolean mVisible;
-    private final Runnable mHideRunnable = new Runnable() {
-        @Override
-        public void run() {
-            hide();
-        }
-    };
-    /**
-     * Touch listener to use for in-layout UI controls to delay hiding the
-     * system UI. This is to prevent the jarring behavior of controls going away
-     * while interacting with activity UI.
-     */
-    private final View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (AUTO_HIDE) {
-                delayedHide(AUTO_HIDE_DELAY_MILLIS);
-            }
-            return false;
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -203,77 +133,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         });
 
 
-
-        mVisible = true;
-       /* mControlsView = findViewById(R.id.fullscreen_content_controls);
-        mContentView = findViewById(R.id.fullscreen_content);*/
-
-
-        // Set up the user interaction to manually show or hide the system UI.
-       /* mContentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggle();
-            }
-        });*/
-
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-        // findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
-        // Trigger the initial hide() shortly after the activity has been
-        // created, to briefly hint to the user that UI controls
-        // are available.
-        delayedHide(100);
-    }
-
-    private void toggle() {
-        if (mVisible) {
-            hide();
-        } else {
-            show();
-        }
-    }
-
-    private void hide() {
-        // Hide UI first
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
-        }
-        // mControlsView.setVisibility(View.GONE);
-        mVisible = false;
-
-        // Schedule a runnable to remove the status and navigation bar after a delay
-        mHideHandler.removeCallbacks(mShowPart2Runnable);
-        mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
-    }
-
-    @SuppressLint("InlinedApi")
-    private void show() {
-        // Show the system bar
-       /* mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);*/
-        mVisible = true;
-
-        // Schedule a runnable to display UI elements after a delay
-        mHideHandler.removeCallbacks(mHidePart2Runnable);
-        mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
-    }
-
-    /**
-     * Schedules a call to hide() in [delay] milliseconds, canceling any
-     * previously scheduled calls.
-     */
-    private void delayedHide(int delayMillis) {
-        mHideHandler.removeCallbacks(mHideRunnable);
-        mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 
     private void googleSignIn() {
@@ -292,37 +151,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         //Google Login
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            int statusCode = result.getStatus().getStatusCode();
+            Log.i("Sign in Result",String.valueOf(statusCode));
             handleGoogleSignInResult(result);
         }
     }
 
-    /*  @Override
-      protected void onStart() {
-          super.onStart();
-          OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
-          if (opr.isDone()){
-              //If the user's credentials are cached, they will be available immediately at this point
-              Log.d(TAG,"Got cached Sign in");
-              GoogleSignInResult result = opr.get();
-              handleGoogleSignInResult(result);
-
-          }else {
-              //The user has not previously signed in on this device or the session has expired.Single sign-on will occur here
-              showProgressDialog();
-              opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                  @Override
-                  public void onResult(@NonNull GoogleSignInResult result) {
-                      hideProgressDialog();
-                      handleGoogleSignInResult(result);
-                  }
-              });
-          }
-      }*/
     @Override
     public void onPause() {
         super.onPause();
-        mGoogleApiClient.stopAutoManage(this);
-        mGoogleApiClient.disconnect();
+        /*mGoogleApiClient.stopAutoManage(this);
+        mGoogleApiClient.disconnect();*/
     }
 
     private void showProgressDialog() {
@@ -353,7 +192,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             isVerified=true;
             //get the 50X50 profile pic they send us
             final String pictureURL = account.getPhotoUrl().toString();
-
             new ProfilePicAsync(pictureURL,2).execute();
 
         } else {
@@ -414,6 +252,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         updateUI();
     }
     private void saveNewGoogleUser(final Bitmap bitmap){
+        Log.i("EmailStus","Now We are here");
         parseUser = new ParseUser();
         parseUser.setEmail(email);
         parseUser.setUsername(email);
@@ -424,7 +263,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         parseUser.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                updateProfilePic(bitmap);
+                if (e==null){
+                    updateProfilePic(bitmap);
+                }else{
+                    Log.i("Error",e.getMessage());
+                }
+
             }
         });
         //Save the Profile Photo as well
@@ -527,6 +371,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             if (authMode==1) {
                 saveNewFacebookUser(bitmap);
             }else if(authMode==2){
+                Log.i("Save","We are here");
                 saveNewGoogleUser(bitmap);
             }
         }

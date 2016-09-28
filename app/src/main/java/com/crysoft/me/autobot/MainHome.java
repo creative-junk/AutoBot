@@ -15,15 +15,17 @@ public class MainHome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         currentUser = ParseUser.getCurrentUser();
+        setContentView(R.layout.activity_home);
+        username = (TextView) findViewById(R.id.tvWelcomeTxt);
         if(currentUser==null){
             Intent intent = new Intent(this,LoginActivity.class);
             startActivity(intent);
             finish();
         }else{
-            username = (TextView) findViewById(R.id.tvWelcomeTxt);
             username.setText("Welcome back " + currentUser.getString("first_name")+"...");
-            setContentView(R.layout.activity_home);
         }
+
+
 
 
     }
