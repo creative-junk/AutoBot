@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "767396389005",
+    "project_id": "autolink-142914"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767396389005:android:668a80e900e97fb8",
+        "android_client_info": {
+          "package_name": "com.crysoft.me.autobot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "767396389005-jd6i04243ng3cudm75pstu34mu60oapv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.crysoft.me.autobot",
+            "certificate_hash": "40D90E8828208DDB727BE27392CF3DCA3A83A7A9"
+          }
+        },
+        {
+          "client_id": "767396389005-11lrguln7bnp576309mi96d62sjfikv9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeeSi2pdQEQDEvB_gBc0gJiXB7t1m94b0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
