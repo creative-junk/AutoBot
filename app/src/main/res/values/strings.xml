@@ -9,6 +9,7 @@
     <string name="title_activity_safety_tips">Safety Tips</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_splash">Auto Bot</string>
+    <string name="out_of_range">Out of Range! Get closer.</string>
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->

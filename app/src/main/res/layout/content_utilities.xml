@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/llToolbar"
-        android:layout_marginTop="10dp">
+        tools:padding="5dp">
 
         <TextView
             android:id="@+id/tvWelcomeTxt"
@@ -27,15 +27,15 @@
             android:layout_height="wrap_content"
             android:text="Find Places near you"
             android:textColor="@color/colorPrimary"
-            android:textSize="21sp" />
+            android:textSize="21sp"
+            android:layout_marginTop="10dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/lLWelcome"
-        android:orientation="vertical"
-        android:paddingTop="15dp">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -119,6 +119,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@android:color/white"
+                android:layout_marginBottom="2dp"
                 android:onClick="findHospitals">
                 <TextView
                     style="@style/primaryTextView"
@@ -138,6 +139,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@android:color/white"
+                android:layout_marginBottom="2dp"
                 android:onClick="findAirports">
                 <TextView
                     style="@style/primaryTextView"
@@ -157,6 +159,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@android:color/white"
+                android:layout_marginBottom="2dp"
                 android:onClick="findMalls">
                 <TextView
                     style="@style/primaryTextView"
@@ -176,6 +179,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@android:color/white"
+                android:layout_marginBottom="2dp"
                 android:onClick="findBars">
                 <TextView
                     style="@style/primaryTextView"

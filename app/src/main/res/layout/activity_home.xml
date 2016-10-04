@@ -257,5 +257,7 @@
                 android:src="@drawable/safety"
                 android:layout_weight="1"/>
         </LinearLayout>
+
     </LinearLayout>
+
 </RelativeLayout>

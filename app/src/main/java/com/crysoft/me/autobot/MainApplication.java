@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.crysoft.me.autobot.ParseModels.Mechanic;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.parse.Parse;
@@ -16,12 +17,23 @@ import com.parse.ParseUser;
  * Created by Maxx on 5/25/2016.
  */
 public class MainApplication extends Application {
+    // Debugging switch
+    public static final boolean APP_DEBUG = false;
+
+    // Debugging tag for the application
+    public static final String APPTAG = "Autobot";
+
     //Shared Preferences
     private static SharedPreferences preferences;
     //Key for Saving the Near me Preference
     private static String KEY_NEAR_ME="Near Me Key";
     //The default value for Near Me
     private static String NEAR_ME_ENABLED="No";
+
+    private static final float DEFAULT_SEARCH_DISTANCE = 250.0f;
+    public MainApplication(){
+
+    }
 
     @Override
     public void onCreate() {
@@ -31,7 +43,7 @@ public class MainApplication extends Application {
 		 * Parse credentials
 		 */
         //Parse.initialize(this, "photochat2vc09", "spq2vc1LVg09");
-
+        ParseObject.registerSubclass(Mechanic.class);
         //Parse Initialization
         Parse.initialize(new Parse.Configuration.Builder(getApplicationContext())
                 .applicationId("autokit")

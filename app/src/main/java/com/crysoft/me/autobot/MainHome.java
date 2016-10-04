@@ -3,20 +3,31 @@ package com.crysoft.me.autobot;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.parse.ParseGeoPoint;
 import com.parse.ParseUser;
 
 public class MainHome extends AppCompatActivity {
-    ParseUser currentUser;
-    TextView username;
+    private ParseUser currentUser;
+    private TextView username;
+    private EditText latitude;
+    private EditText longitude;
+    private ParseGeoPoint geoPoint;
+    Button generateBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         currentUser = ParseUser.getCurrentUser();
         setContentView(R.layout.activity_home);
         username = (TextView) findViewById(R.id.tvWelcomeTxt);
+
+
         if(currentUser==null){
             Intent intent = new Intent(this,LoginActivity.class);
             startActivity(intent);
@@ -29,6 +40,7 @@ public class MainHome extends AppCompatActivity {
 
 
     }
+
     public void findAMechanic(View view){
         Intent intent = new Intent(this,MechanicsActivity.class);
         startActivity(intent);
