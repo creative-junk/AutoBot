@@ -67,13 +67,6 @@ public class FoodStopsActivity extends FragmentActivity implements OnMapReadyCal
                 .findFragmentById(R.id.foodStopsMap);
         mapFragment.getMapAsync(this);
 
-        backBtn = (TextView) findViewById(R.id.backBtn);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         utility = getIntent().getExtras().getString("utility","restaurant");
     }
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.crysoft.me.autobot.ParseModels.Mechanic;
+import com.crysoft.me.autobot.ParseModels.PartsStore;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.parse.Parse;
@@ -44,6 +45,7 @@ public class MainApplication extends Application {
 		 */
         //Parse.initialize(this, "photochat2vc09", "spq2vc1LVg09");
         ParseObject.registerSubclass(Mechanic.class);
+        ParseObject.registerSubclass(PartsStore.class);
         //Parse Initialization
         Parse.initialize(new Parse.Configuration.Builder(getApplicationContext())
                 .applicationId("autokit")

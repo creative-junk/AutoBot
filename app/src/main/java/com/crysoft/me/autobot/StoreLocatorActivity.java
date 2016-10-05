@@ -17,14 +17,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.crysoft.me.autobot.ParseModels.Mechanic;
+import com.crysoft.me.autobot.ParseModels.PartsStore;
 import com.crysoft.me.autobot.helpers.Constants;
 import com.google.android.gms.common.ConnectionResult;
-
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -34,7 +32,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.Circle;
@@ -44,11 +41,8 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.FindCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
-import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
-import com.parse.ParseImageView;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 
@@ -58,7 +52,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class MechanicsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class StoreLocatorActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener  {
 
     private GoogleMap mMap;
     private SupportMapFragment mapFragment;
@@ -72,7 +66,7 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
     private final Map<String, Marker> mapMarkers = new HashMap<String, Marker>();
     private int mostRecentMapUpdate;
     private boolean hasSetUpInitialLocation;
-    private String selectedMechanicObjectId;
+    private String selectedStoreObjectId;
     private Location lastLocation;
     private Location currentLocation;
 
@@ -83,17 +77,16 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
     private GoogleApiClient locationClient;
 
     //Parse Query Adapter
-    private ParseQueryAdapter<Mechanic> mechanicsQueryAdapter;
-
+    private ParseQueryAdapter<PartsStore> storeQueryAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         radius = 1250.0f;
         lastRadius = radius;
 
-        setContentView(R.layout.activity_mechanics);
+        setContentView(R.layout.activity_store_locator);
         //Setup the Map Fragment
-        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mechanicsMap);
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.storeMap);
         mapFragment.getMapAsync(this);
 
         //Create a new Global location parameters object
@@ -115,13 +108,13 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
                 .build();
 
         //Setup the Query
-        ParseQueryAdapter.QueryFactory<Mechanic> factory =
-                new ParseQueryAdapter.QueryFactory<Mechanic>() {
+        ParseQueryAdapter.QueryFactory<PartsStore> factory =
+                new ParseQueryAdapter.QueryFactory<PartsStore>() {
                     @Override
-                    public ParseQuery<Mechanic> create() {
+                    public ParseQuery<PartsStore> create() {
                         Location myLocation = (currentLocation == null) ? lastLocation : currentLocation;
-                        ParseQuery<Mechanic> query = Mechanic.getQuery();
-                        query.orderByDescending("first_name");
+                        ParseQuery<PartsStore> query = PartsStore.getQuery();
+                        query.orderByDescending("store_name");
                         query.whereWithinKilometers("location", geoPointFromMyLocation(myLocation), radius * Constants.METERS_PER_FEET / Constants.METERS_PER_KILOMETER);
                         query.setLimit(Constants.MAX_SEARCH_RESULTS);
                         return query;
@@ -129,39 +122,37 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
 
                 };
         //Setup the query Adapter
-        mechanicsQueryAdapter = new ParseQueryAdapter<Mechanic>(this, factory) {
+        storeQueryAdapter = new ParseQueryAdapter<PartsStore>(this, factory) {
             @Override
-            public View getItemView(Mechanic mechanic, View view, ViewGroup parent) {
+            public View getItemView(PartsStore partsStore, View view, ViewGroup parent) {
                 if (view == null) {
-                    view = View.inflate(getContext(), R.layout.mechanic_item, null);
+                    view = View.inflate(getContext(), R.layout.store_locator_item, null);
                 }
-                TextView firstName = (TextView) view.findViewById(R.id.first_name);
-                TextView lastName = (TextView) view.findViewById(R.id.last_name);
+                TextView storeName = (TextView) view.findViewById(R.id.store_name);
                 TextView telephone = (TextView) view.findViewById(R.id.telephone);
                 //Add & download Image
-               // ParseImageView profileImage = (ParseImageView) view.findViewById(R.id.mechanicImage);
+                // ParseImageView profileImage = (ParseImageView) view.findViewById(R.id.PartsStoreImage);
 
-                firstName.setText(mechanic.getFirstName());
-                lastName.setText(mechanic.getLastName());
-                telephone.setText(mechanic.getTelephone());
+                storeName.setText(partsStore.getStoreName());
+                telephone.setText(partsStore.getTelephone());
 
                 return view;
             }
         };
         //Disable automatic loading when adapter is attached to view
-        mechanicsQueryAdapter.setAutoload(false);
+        storeQueryAdapter.setAutoload(false);
         //Disable pagination,we already have limits set
-        mechanicsQueryAdapter.setPaginationEnabled(false);
+        storeQueryAdapter.setPaginationEnabled(false);
         //Attach the Query Adapter to the listview
-        ListView mechanicsList = (ListView) findViewById(R.id.mechanics_listview);
-        mechanicsList.setAdapter(mechanicsQueryAdapter);
+        ListView storeList = (ListView) findViewById(R.id.store_listview);
+        storeList.setAdapter(storeQueryAdapter);
 
         //handle user selection
-        mechanicsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        storeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Mechanic item = mechanicsQueryAdapter.getItem(position);
-                selectedMechanicObjectId = item.getObjectId();
+                final PartsStore item = storeQueryAdapter.getItem(position);
+                selectedStoreObjectId = item.getObjectId();
                 mMap.animateCamera(
                         CameraUpdateFactory.newLatLng(new LatLng(item.getLocation().getLatitude(), item.getLocation().getLongitude())),
                         new GoogleMap.CancelableCallback() {
@@ -186,7 +177,6 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
                 }
             }
         });
-
 
     }
 
@@ -293,7 +283,7 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
             //Display an Error Dialog
             Dialog dialog = GooglePlayServicesUtil.getErrorDialog(resultCode, this, 0);
             if (dialog != null) {
-                ErrorDialogFragment errorDialogFragment = new ErrorDialogFragment();
+                StoreLocatorActivity.ErrorDialogFragment errorDialogFragment = new StoreLocatorActivity.ErrorDialogFragment();
                 errorDialogFragment.setDialog(dialog);
                 errorDialogFragment.show(getSupportFragmentManager(), MainApplication.APPTAG);
             }
@@ -310,7 +300,7 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
         //if location info is available load data
         if (myLoc != null) {
             //Refresh list with new data based on Lcation Updates
-            mechanicsQueryAdapter.loadObjects();
+            storeQueryAdapter.loadObjects();
         }
     }
 
@@ -328,14 +318,14 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
         }
         final ParseGeoPoint myPoint = geoPointFromMyLocation(myLoc);
         //Create the Map Parse Query
-        ParseQuery<Mechanic> mapQuery = Mechanic.getQuery();
+        ParseQuery<PartsStore> mapQuery = PartsStore.getQuery();
         //set up additional query filters
         mapQuery.whereWithinKilometers("location", myPoint, Constants.MAX_SEARCH_DISTANCE);
         mapQuery.setLimit(Constants.MAX_SEARCH_RESULTS);
         //Kickoff query in the background
-        mapQuery.findInBackground(new FindCallback<Mechanic>() {
+        mapQuery.findInBackground(new FindCallback<PartsStore>() {
             @Override
-            public void done(List<Mechanic> objects, ParseException e) {
+            public void done(List<PartsStore> objects, ParseException e) {
                 if (e != null) {
                     if (MainApplication.APP_DEBUG) {
                         Log.d(MainApplication.APPTAG, "An error occurred while querying for map posts.", e);
@@ -353,15 +343,15 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
                 //items to show on the Map
                 Set<String> toKeep = new HashSet<String>();
                 //Loop through the results of the search
-                for (Mechanic mechanic : objects) {
+                for (PartsStore partsStore : objects) {
                     //Add this item to the list of map pins to keep
-                    toKeep.add(mechanic.getObjectId());
+                    toKeep.add(partsStore.getObjectId());
                     //Check for an existing marker for this item
-                    Marker oldMarker = mapMarkers.get(mechanic.getObjectId());
+                    Marker oldMarker = mapMarkers.get(partsStore.getObjectId());
                     //Setup the map Marker's location
-                    MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(mechanic.getLocation().getLatitude(), mechanic.getLocation().getLongitude()));
+                    MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(partsStore.getLocation().getLatitude(), partsStore.getLocation().getLongitude()));
                     //Setup the Marker Options if it's within the Search radius
-                    if (mechanic.getLocation().distanceInKilometersTo(myPoint) > radius * Constants.METERS_PER_FEET / Constants.METERS_PER_KILOMETER) {
+                    if (partsStore.getLocation().distanceInKilometersTo(myPoint) > radius * Constants.METERS_PER_FEET / Constants.METERS_PER_KILOMETER) {
                         //Check for a =n existing out of range marker
                         if (oldMarker != null) {
                             if (oldMarker.getSnippet() == null) {
@@ -374,8 +364,8 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
                         }
                         //Display a red Marker with a predertermined title and no snippet
                         markerOptions = markerOptions
-                                .title(mechanic.getFirstName()+" "+mechanic.getLastName())
-                                .snippet(mechanic.getTelephone())
+                                .title(partsStore.getStoreName())
+                                .snippet(partsStore.getTelephone())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.mechanic_marker));
                     } else {
                         //Check for existing in range Marker
@@ -389,20 +379,20 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
                             }
 
                         }
-                        //Display a green Marker with the Mechanics Name
-                       // markerOptions = markerOptions.title(mechanic.getLastName()).snippet(mechanic.getFirstName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                        //Display a green Marker with the PartsStores Name
+                        // markerOptions = markerOptions.title(PartsStore.getLastName()).snippet(PartsStore.getFirstName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                         markerOptions = markerOptions
-                                .title(mechanic.getFirstName()+" "+mechanic.getLastName())
-                                .snippet(mechanic.getTelephone())
+                                .title(partsStore.getStoreName())
+                                .snippet(partsStore.getTelephone())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.mechanic_marker));
 
                     }
                     //Add a new Marker
                     Marker marker = mMap.addMarker(markerOptions);
-                    mapMarkers.put(mechanic.getObjectId(), marker);
-                    if (mechanic.getObjectId().equals(selectedMechanicObjectId)) {
+                    mapMarkers.put(partsStore.getObjectId(), marker);
+                    if (partsStore.getObjectId().equals(selectedStoreObjectId)) {
                         marker.showInfoWindow();
-                        selectedMechanicObjectId = null;
+                        selectedStoreObjectId = null;
                     }
                 }
                 cleanUpMarkers(toKeep);
@@ -675,7 +665,7 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
         //Check if Play services ca =n actually provide the Dialog Box
         if (errorDialog != null) {
             //Create a new Dialog Fragment in which to show the error
-            ErrorDialogFragment errorFragment = new ErrorDialogFragment();
+            StoreLocatorActivity.ErrorDialogFragment errorFragment = new StoreLocatorActivity.ErrorDialogFragment();
             //set the Dialog in the Dialog Fragment
             errorFragment.setDialog(errorDialog);
             //Show the error Dialog in the Dialog Fragment
@@ -741,5 +731,4 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
             return mDialog;
         }
     }
-
 }

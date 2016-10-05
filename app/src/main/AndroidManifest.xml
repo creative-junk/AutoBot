@@ -101,7 +101,7 @@
                 android:value="com.crysoft.me.autobot.MainHome" />
         </activity>
         <activity
-            android:name=".LocationServicesActivity"
+            android:name=".StoreLocatorActivity"
             android:label="@string/title_activity_location_services"
             android:screenOrientation="portrait">
             <meta-data

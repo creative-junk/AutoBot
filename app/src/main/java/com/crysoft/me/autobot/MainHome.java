@@ -3,7 +3,6 @@ package com.crysoft.me.autobot;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,7 +57,7 @@ public class MainHome extends AppCompatActivity {
         startActivity(intent);
     }
     public void findAShop(View view){
-        Intent intent = new Intent(this,LocationServicesActivity.class);
+        Intent intent = new Intent(this,StoreLocatorActivity.class);
         startActivity(intent);
     }
     public void goToAlerts(View view){
