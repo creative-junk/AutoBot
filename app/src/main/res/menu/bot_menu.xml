@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".HomeActivity">
+    <item
+        android:id="@+id/nav_home"
+        android:title="Home"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_cart"
+        android:icon="@drawable/ic_cart"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:title="Cart"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/nav_account"
+        android:title="My Account"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/nav_searches"
+        android:icon="@drawable/ic_menu_slideshow"
+        android:title="Recent Searches"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/nav_viewed"
+        android:icon="@drawable/ic_menu_manage"
+        android:title="Recently Viewed"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_menu_manage"
+        android:title="Log out"
+        app:showAsAction="never"/>
+
+</menu>

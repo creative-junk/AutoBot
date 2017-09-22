@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/backgroundColor"
     tools:context="com.crysoft.me.autobot.AlertsActivity">
 
     <include layout="@layout/content_alerts" />

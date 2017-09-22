@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         setContentView(R.layout.activity_login);
 
         btnFbLogin = (Button) findViewById(R.id.btnFbLogin);
-        btnGoogleLogin = (Button) findViewById(R.id.btnGoogleLogin);
+        /*btnGoogleLogin = (Button) findViewById(R.id.btnGoogleLogin);*/
 
 
         //SIGN IN WITH FACEBOOK
@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
-
+/*
         //SIGN IN WITH GOOGLE
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -121,7 +121,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         // Build a GoogleApiClient with access to the Google Sign-In API and the
         // options specified by gso.
         mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .enableAutoManage(this /* FragmentActivity *, this /* OnConnectionFailedListener *)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 googleSignIn();
             }
         });
-
+*/
 
     }
 

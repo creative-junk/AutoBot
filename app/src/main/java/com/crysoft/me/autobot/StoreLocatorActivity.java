@@ -9,11 +9,17 @@ import android.graphics.Color;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -52,7 +58,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class StoreLocatorActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener  {
+import static com.crysoft.me.autobot.helpers.Utils.isLocationEnabled;
+import static com.crysoft.me.autobot.helpers.Utils.isOnline;
+import static com.crysoft.me.autobot.helpers.Utils.showLocationDisabledDialog;
+import static com.crysoft.me.autobot.helpers.Utils.showNoInternetConnection;
+
+public class StoreLocatorActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener  {
 
     private GoogleMap mMap;
     private SupportMapFragment mapFragment;
@@ -85,6 +96,29 @@ public class StoreLocatorActivity extends FragmentActivity implements OnMapReady
         lastRadius = radius;
 
         setContentView(R.layout.activity_store_locator);
+       /* Toolbar toolbar = (Toolbar) findViewById(R.id.llToolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+*/
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+       /* ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+*/
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+
+        if (!isLocationEnabled(this)){
+            //Location Services are Disabled
+            showLocationDisabledDialog(this);
+        }else if (!isOnline(this)){
+            showNoInternetConnection(this);
+        }
+
         //Setup the Map Fragment
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.storeMap);
         mapFragment.getMapAsync(this);
@@ -139,10 +173,13 @@ public class StoreLocatorActivity extends FragmentActivity implements OnMapReady
                 return view;
             }
         };
+
         //Disable automatic loading when adapter is attached to view
         storeQueryAdapter.setAutoload(false);
+
         //Disable pagination,we already have limits set
         storeQueryAdapter.setPaginationEnabled(false);
+
         //Attach the Query Adapter to the listview
         ListView storeList = (ListView) findViewById(R.id.store_listview);
         storeList.setAdapter(storeQueryAdapter);
@@ -698,6 +735,11 @@ public class StoreLocatorActivity extends FragmentActivity implements OnMapReady
         });
 
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        return false;
     }
 
     /***

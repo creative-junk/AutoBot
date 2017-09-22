@@ -1,14 +1,14 @@
 <resources>
-    <string name="app_name">AUTO BOT</string>
+    <string name="app_name">Auto FIX</string>
     <string name="title_activity_shop">Shop</string>
     <string name="title_activity_roadside_assist">Roadside Assist</string>
-    <string name="title_activity_mechanics">Mechanics</string>
+    <string name="title_activity_mechanics">Mechanic Services</string>
     <string name="title_activity_location_services">Location Services</string>
-    <string name="title_activity_alerts">Alerts</string>
+    <string name="title_activity_alerts">News &amp; Alerts</string>
     <string name="title_activity_news">News</string>
-    <string name="title_activity_safety_tips">Safety Tips</string>
+    <string name="title_activity_safety_tips">Quick Tips</string>
     <string name="title_activity_settings">Settings</string>
-    <string name="title_activity_splash">Auto Bot</string>
+    <string name="title_activity_splash">Auto Fix</string>
     <string name="out_of_range">Out of Range! Get closer.</string>
     <!-- Strings related to Settings -->
 
@@ -70,4 +70,34 @@
     <string name="title_activity_login">Login</string>
     <!-- FACEBOOK -->
     <string name="facebook_app_id">182903532146766</string>
+    <!-- Location Dialog -->
+    <string name="location_services_not_enabled">Location Services Disabled\n\nPlease enable location services</string>
+    <string name="open_location_settings">Enable</string>
+    <!-- Internet Dialog -->
+    <string name="internet_not_enabled">Internet Services Disabled\n\nPlease enable your internet services</string>
+    <string name="open_internet_settings">Enable</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Autofix Mechanics!</string>
+    <string name="slide_1_desc">The easiest way to find mechanics around you using just your phone! </string>
+
+    <string name="slide_2_title">Autofix stores</string>
+    <string name="slide_2_desc">The easiest way to find parts for your car, only a click away!</string>
+
+    <string name="slide_3_title">Routes and Directions</string>
+    <string name="slide_3_desc">Easy to use maps wil get you to th</string>
+
+    <string name="slide_4_title">Routes &amp; Directions</string>
+    <string name="slide_4_desc">Get Map Routes and Directions to any mechanic or parts store!</string>
+    <string name="title_activity_quick_tips_list">Quick Tips</string>
+    <string name="liveurl">http://creative-junk.com/autofix/wp-json/wp/v2/posts?categories=</string>
+    <string name="title_activity_article_details">Article Details</string>
+
+
 </resources>

@@ -3,52 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.crysoft.me.autobot.MainHome">
 
-    <LinearLayout
-        android:id="@+id/llToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@color/colorPrimary"
-                android:padding="5dp"
-                android:text="@string/app_name"
-                android:textColor="@android:color/white"
-                android:textSize="16dp" />
-            <ImageView
-                android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_gravity="right"
-                android:layout_height="28dp"
-                android:src="@drawable/overflow"/>
-
-        </RelativeLayout>
-
-        <View
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorPrimary" />
-    </LinearLayout>
-
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
     <LinearLayout
         android:id="@+id/lLWelcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/llToolbar"
+        android:layout_below="@+id/toolbar"
         android:layout_marginTop="10dp">
 
         <TextView
@@ -69,25 +38,29 @@
 
         <LinearLayout
             style="@style/linearBox"
+            android:layout_height="110dp"
+
             android:layout_weight="2"
-            android:onClick="goToShop"
-            android:layout_height="110dp">
+            android:onClick="findAShop">
 
             <TextView
                 style="@style/mediumFont"
-                android:text="shop" />
+                android:onClick="findAShop"
+                android:text="Auto Shop" />
 
             <TextView
                 style="@style/smallFont"
-                android:text="Find parts and Accessories"
-                android:textIsSelectable="true"
-                android:textAlignment="viewStart" />
+                android:text="Parts &amp; Accessory Shops near you"
+                android:textAlignment="viewStart"
+                android:textIsSelectable="true" />
+
             <ImageView
-                android:layout_weight="1"
+                style="?android:borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/shop"
-                />
+                android:layout_weight="1"
+                android:onClick="findAShop"
+                android:src="@drawable/shop" />
         </LinearLayout>
 
         <LinearLayout
@@ -96,24 +69,28 @@
             android:layout_marginLeft="6dp"
             android:layout_weight="1"
             android:background="@color/colorAccent"
+            android:onClick="goToSettings"
             android:orientation="vertical"
-            android:padding="10dp"
-            android:onClick="goToSettings">
+            android:padding="10dp">
 
             <TextView
                 style="@style/mediumFont"
+                android:onClick="goToSettings"
                 android:text="Account" />
 
             <TextView
                 style="@style/smallFont"
-                android:text="Settings, Preferences &amp; Orders"
-                />
+                android:text="Settings &amp; Preferences" />
+
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
                 android:layout_weight="1"
-                android:layout_gravity="bottom"
-                android:src="@drawable/account"/>
+                android:onClick="goToSettings"
+                android:src="@drawable/account"
+                app:paddingStart="0dp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -123,97 +100,56 @@
         android:layout_below="@+id/lLRow1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="goToAssist">
+        >
+
         <LinearLayout
             style="@style/linearBox"
-            android:layout_weight="1">
-
-            <TextView
-                style="@style/mediumFont"
-                android:text="road assistance" />
-
-            <TextView
-                style="@style/smallFont"
-                android:text="get priority help"
-                 />
-            <ImageView
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/roadassist"
-                />
-        </LinearLayout>
-        <LinearLayout
-            style="@style/linearBox"
-            android:layout_marginLeft="6dp"
             android:layout_weight="1"
             android:onClick="findAMechanic">
 
             <TextView
                 style="@style/mediumFont"
-                android:text="mechanic services"
-                android:layout_width="match_parent" />
+                android:onClick="findAMechanic"
+                android:text="Mechanic Finder" />
 
             <TextView
                 style="@style/smallFont"
-                android:text="find the nearest mechanic"
-                />
+                android:text="find the nearest mechanic" />
+
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                style="?android:borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_gravity="bottom"
-                android:src="@drawable/location"/>
+                android:onClick="findAMechanic"
+                android:src="@drawable/roadassist" />
         </LinearLayout>
+
         <LinearLayout
             style="@style/linearBox"
             android:layout_marginLeft="6dp"
             android:layout_weight="1"
-            android:onClick="findAShop">
+            android:onClick="goToAlerts">
 
             <TextView
                 style="@style/mediumFont"
-                android:text="store locator" />
-
-            <TextView
-                style="@style/smallFont"
-                android:text="find the nearest parts shop"
-
-                android:textIsSelectable="true" />
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_weight="1"
-                android:layout_gravity="bottom"
-                android:src="@drawable/location_services"/>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/lLRow3"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/lLRow2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="goToAlerts">
-        <LinearLayout
-            style="@style/linearBox"
-            android:layout_weight="1">
-
-            <TextView
-                style="@style/mediumFont"
+                android:onClick="goToAlerts"
                 android:text="News &amp; Alerts" />
 
             <TextView
                 style="@style/smallFont"
-                android:text="traffic,closed roads, diversions"
-
+                android:text="traffic, closed roads, diversions"
                 android:textIsSelectable="true" />
+
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                style="?android:borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/alerts"/>
+                android:onClick="goToAlerts"
+                android:src="@drawable/alerts" />
         </LinearLayout>
+
         <LinearLayout
             style="@style/linearBox"
             android:layout_marginLeft="6dp"
@@ -222,40 +158,54 @@
 
             <TextView
                 style="@style/mediumFont"
-                android:text="Quick tips" />
+                android:layout_width="match_parent"
+                android:onClick="goToTips"
+                android:text="Quick Tips" />
 
             <TextView
                 style="@style/smallFont"
-
                 android:text="safety,service,fuel economy" />
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_weight="1"
-                android:layout_gravity="bottom"
-                android:src="@drawable/news"/>
 
+            <ImageView
+                style="?android:borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:onClick="goToTips"
+                android:src="@drawable/news" />
         </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/lLRow3"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/lLRow2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <LinearLayout
             style="@style/linearBox"
-            android:layout_marginLeft="6dp"
-            android:layout_weight="1"
+            android:layout_width="240dp"
             android:onClick="findFoodStops">
 
             <TextView
                 style="@style/mediumFont"
-                android:text="nearby places" />
+                android:onClick="findFoodStops"
+                android:text="Nearby Places" />
 
             <TextView
                 style="@style/smallFont"
-                android:text="find ATMs, Banks,Hospitals,Bars,Police Stations"
-
+                android:text="ATMs,Hospitals, Banks,.."
                 android:textIsSelectable="true" />
+
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/safety"
-                android:layout_weight="1"/>
+                style="?android:borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="findFoodStops"
+                android:src="@drawable/safety" />
         </LinearLayout>
 
     </LinearLayout>

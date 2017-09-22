@@ -43,9 +43,10 @@ public class MainApplication extends Application {
 		/*
 		 * Parse credentials
 		 */
-        //Parse.initialize(this, "photochat2vc09", "spq2vc1LVg09");
+
         ParseObject.registerSubclass(Mechanic.class);
         ParseObject.registerSubclass(PartsStore.class);
+
         //Parse Initialization
         Parse.initialize(new Parse.Configuration.Builder(getApplicationContext())
                 .applicationId("autokit")

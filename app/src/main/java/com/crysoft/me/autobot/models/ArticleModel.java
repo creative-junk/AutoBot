@@ -10,7 +10,9 @@ public class ArticleModel implements Parcelable {
     private String articleTitle;
     private String articleContent;
     private String articleCategory;
+    private String articleSummary;
     private String objectId;
+    private String featuredImage;
 
     public String getArticleTitle() {
         return articleTitle;
@@ -44,15 +46,31 @@ public class ArticleModel implements Parcelable {
         this.objectId = objectId;
     }
 
+    public String getArticleSummary() {
+        return articleSummary;
+    }
+
+    public void setArticleSummary(String articleSummary) {
+        this.articleSummary = articleSummary;
+    }
+
+    public String getFeaturedImage() {
+        return featuredImage;
+    }
+
+    public void setFeaturedImage(String featuredImage) {
+        this.featuredImage = featuredImage;
+    }
+
     public ArticleModel(Parcel in) {
         String[] array = new String[6];
         in.readStringArray(array);
         articleTitle = array[0];
         articleContent = array[1];
-
         articleCategory = array[2];
         objectId = array[3];
-
+        articleSummary = array[4];
+        featuredImage = array[5];
     }
     public ArticleModel(){
 
@@ -75,6 +93,6 @@ public class ArticleModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeStringArray(new String[]{this.articleTitle, this.articleContent, this.articleCategory});
+        dest.writeStringArray(new String[]{this.articleTitle, this.articleContent, this.articleCategory,this.objectId,this.articleSummary,this.featuredImage});
     }
 }

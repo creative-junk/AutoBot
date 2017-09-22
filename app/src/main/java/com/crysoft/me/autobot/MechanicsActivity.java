@@ -7,19 +7,28 @@ import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crysoft.me.autobot.ParseModels.Mechanic;
 import com.crysoft.me.autobot.helpers.Constants;
@@ -58,7 +67,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class MechanicsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+import static com.crysoft.me.autobot.helpers.Utils.isLocationEnabled;
+import static com.crysoft.me.autobot.helpers.Utils.isOnline;
+import static com.crysoft.me.autobot.helpers.Utils.showLocationDisabledDialog;
+import static com.crysoft.me.autobot.helpers.Utils.showNoInternetConnection;
+
+public class MechanicsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleMap mMap;
     private SupportMapFragment mapFragment;
@@ -92,6 +106,29 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
         lastRadius = radius;
 
         setContentView(R.layout.activity_mechanics);
+       /* Toolbar toolbar = (Toolbar) findViewById(R.id.llToolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+*/
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.mechanics_drawer_layout);
+  /*      ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+*/
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        if (!isLocationEnabled(this)){
+            //Location Services are Disabled
+            showLocationDisabledDialog(this);
+        }else if (!isOnline(this)){
+            showNoInternetConnection(this);
+        }
+
+
         //Setup the Map Fragment
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mechanicsMap);
         mapFragment.getMapAsync(this);
@@ -113,6 +150,16 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
 
         //Setup the Query
         ParseQueryAdapter.QueryFactory<Mechanic> factory =
@@ -139,7 +186,7 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
                 TextView lastName = (TextView) view.findViewById(R.id.last_name);
                 TextView telephone = (TextView) view.findViewById(R.id.telephone);
                 //Add & download Image
-               // ParseImageView profileImage = (ParseImageView) view.findViewById(R.id.mechanicImage);
+                // ParseImageView profileImage = (ParseImageView) view.findViewById(R.id.mechanicImage);
 
                 firstName.setText(mechanic.getFirstName());
                 lastName.setText(mechanic.getLastName());
@@ -223,6 +270,10 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
             }
             //Update the Circle on the Map
             updateCircle(myLatLng);
+        } else {
+
+
+
         }
         //Save the current radius
         lastRadius = radius;
@@ -230,6 +281,7 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
         doMapQuery();
         doListQuery();
     }
+
     /*
    * Handle results returned to this Activity by other Activities started with
    * startActivityForResult(). In particular, the method onConnectionFailed() in
@@ -374,14 +426,14 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
                         }
                         //Display a red Marker with a predertermined title and no snippet
                         markerOptions = markerOptions
-                                .title(mechanic.getFirstName()+" "+mechanic.getLastName())
+                                .title(mechanic.getFirstName() + " " + mechanic.getLastName())
                                 .snippet(mechanic.getTelephone())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.mechanic_marker));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.mech));
                     } else {
                         //Check for existing in range Marker
                         if (oldMarker != null) {
                             if (oldMarker.getSnippet() != null) {
-                                //In range Marker alreday exists, skip adding it
+                                //In range Marker already exists, skip adding it
                                 continue;
                             } else {
                                 //Marker is now in range, needs to be refreshed
@@ -390,11 +442,11 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
 
                         }
                         //Display a green Marker with the Mechanics Name
-                       // markerOptions = markerOptions.title(mechanic.getLastName()).snippet(mechanic.getFirstName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                        markerOptions = markerOptions.title(mechanic.getLastName()).snippet(mechanic.getFirstName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                         markerOptions = markerOptions
-                                .title(mechanic.getFirstName()+" "+mechanic.getLastName())
-                                .snippet(mechanic.getTelephone())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.mechanic_marker));
+                                .title(mechanic.getFirstName() + " " + mechanic.getLastName())
+                                .snippet(mechanic.getTelephone());
+                                //.icon(BitmapDescriptorFactory.fromResource(R.drawable.mech));
 
                     }
                     //Add a new Marker
@@ -553,6 +605,7 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
             Log.d("Connected location", MainApplication.APPTAG);
         }
         currentLocation = getLocation();
+
         startPeriodicUpdates();
     }
 
@@ -698,6 +751,7 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
             return;
         }
         mMap.setMyLocationEnabled(true);
+
         //Setup Camera Change Handler
         mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override
@@ -708,6 +762,11 @@ public class MechanicsActivity extends FragmentActivity implements OnMapReadyCal
         });
 
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        return false;
     }
 
     /***

@@ -12,29 +12,40 @@
     tools:context=".UtilitiesActivity"
     tools:showIn="@layout/activity_utilities">
 
-    <include layout="@layout/toolbar" />
-
-    <LinearLayout
-        android:id="@+id/lLWelcome"
+    <LinearLayout android:id="@+id/llToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/llToolbar"
-        tools:padding="5dp">
-
-        <TextView
-            android:id="@+id/tvWelcomeTxt"
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Find Places near you"
-            android:textColor="@color/colorPrimary"
-            android:textSize="21sp"
-            android:layout_marginTop="10dp" />
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Find Places near You"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16dp" />
+
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/lLWelcome"
+        android:layout_below="@id/llToolbar"
         android:orientation="vertical">
 
         <LinearLayout
@@ -200,11 +211,13 @@
                 android:orientation="horizontal"
                 android:background="@android:color/white"
                 android:onClick="findPolice">
+
                 <TextView
                     style="@style/primaryTextView"
                     android:layout_width="match_parent"
-                    android:text="Police Stations"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:onClick="findPoliceStations"
+                    android:text="Police Stations" />
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="25dp"

@@ -3,6 +3,8 @@ package com.crysoft.me.autobot.helpers;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,12 +12,20 @@ import android.graphics.Matrix;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.widget.Toast;
 
+import com.crysoft.me.autobot.R;
+
 import java.io.ByteArrayOutputStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
@@ -28,10 +38,68 @@ import java.util.Date;
  * Created by Maxx on 7/20/2016.
  */
 public class Utils {
+    /**
+     * Check is Location Services are enabled
+     *
+     * @param context
+     * @return true or false
+     */
+    public static boolean isLocationEnabled(Context context) {
+        int locationMode = 0;
+        String locationProviders;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            try {
+                locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
+
+            } catch (Settings.SettingNotFoundException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+            return locationMode != Settings.Secure.LOCATION_MODE_OFF;
+
+        } else {
+            locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+            return !TextUtils.isEmpty(locationProviders);
+        }
 
 
-    public static final void showNoInternetConnection(Context context) {
+    }
+    public static void showLocationDisabledDialog(final Context context){
+        // notify user
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+        dialog.setMessage(context.getResources().getString(R.string.location_services_not_enabled));
+        dialog.setPositiveButton(context.getResources().getString(R.string.open_location_settings), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                // TODO Auto-generated method stub
+                Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                context.startActivity(myIntent);
+                //get gps
+            }
+        });
+
+        dialog.show();
+    }
+
+    public static final void showNoInternetConnection(final Context context) {
         Toast.makeText(context, "No Internet Connection", Toast.LENGTH_SHORT).show();
+        // notify user
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+        dialog.setMessage(context.getResources().getString(R.string.internet_not_enabled));
+        dialog.setNeutralButton(context.getResources().getString(R.string.open_internet_settings), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                // TODO Auto-generated method stub
+                Intent myIntent = new Intent( Settings.ACTION_WIRELESS_SETTINGS);
+                context.startActivity(myIntent);
+                //get gps
+            }
+        });
+
+        dialog.show();
+
     }
 
     public static final String getBasePath() {
@@ -161,7 +229,8 @@ public class Utils {
         }
         return out;
     }
-    public static String formatPrice(int price){
+
+    public static String formatPrice(int price) {
         String formattedPrice;
 
         DecimalFormat fmt = new DecimalFormat();

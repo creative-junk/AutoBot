@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,17 +37,20 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.w3c.dom.Text;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class FoodStopsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
+public class FoodStopsActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
 
     private GoogleMap mMap;
 
     private TextView backBtn;
+    private TextView tvActivityName;
     private EditText searchText;
     private Button findBtn;
 
@@ -56,11 +60,14 @@ public class FoodStopsActivity extends FragmentActivity implements OnMapReadyCal
     //Map Fragment
 
     String utility;
-
+    String title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foodstops);
+
+        tvActivityName = (TextView) findViewById(R.id.tvActivityName);
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -68,6 +75,9 @@ public class FoodStopsActivity extends FragmentActivity implements OnMapReadyCal
         mapFragment.getMapAsync(this);
 
         utility = getIntent().getExtras().getString("utility","restaurant");
+        title = getIntent().getExtras().getString("title","Restaurants Near Me");
+
+        tvActivityName.setText(title.trim());
     }
 
     public void searchMap(View v){
